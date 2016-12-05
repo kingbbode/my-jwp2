@@ -1,15 +1,10 @@
 package slipp.model;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
-import javax.persistence.Entity;
-import javax.persistence.ForeignKey;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
 
 @Entity
 public class Answer {
@@ -42,7 +37,8 @@ public class Answer {
 		this.createDate = LocalDateTime.now();
 		this.deleted = false;
 	}
-	
+
+	@JsonGetter
 	public String getFormattedCreateDate() {
 		if (createDate == null) {
 			return "";

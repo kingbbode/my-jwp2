@@ -1,30 +1,22 @@
 package slipp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.Where;
+
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ForeignKey;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OrderBy;
-
-import org.hibernate.annotations.Where;
 
 @Entity
 public class Question {
 	@Id
 	@GeneratedValue
 	private Long id;
-	
+
 	@ManyToOne
 	@JoinColumn(foreignKey = @ForeignKey(name = "fk_question_writer"))
+	@JsonIgnore
 	private User writer;
 	
 	@Column(length = 100, nullable = false)
@@ -39,6 +31,7 @@ public class Question {
 	@OneToMany(mappedBy="question")
 	@Where(clause = "deleted = false")
 	@OrderBy("id ASC")
+	@JsonIgnore
 	private List<Answer> answers;
 	
 	private boolean deleted;
