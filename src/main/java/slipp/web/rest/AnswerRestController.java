@@ -39,6 +39,6 @@ public class AnswerRestController {
 		Answer answer = answerRepository.findOne(id);
 		answer.delete(loginUser);
 		answerRepository.save(answer);
-		return new ResponseEntity<>(HttpStatus.OK);
+		return new ResponseEntity<>("성공", HttpStatus.OK);
 	}
 }
